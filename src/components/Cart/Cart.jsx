@@ -2,7 +2,7 @@ import React from "react";
 import "./Cart.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-
+import { ToastContainer, toast } from "react-toastify";
 const Cart = ({ cart, handleClearCart, children }) => {
    // console.log(handleClearCart);
    // const cart = props.cart; // option 1

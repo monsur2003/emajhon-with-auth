@@ -2,10 +2,16 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import "./Product.css";
+import { toast } from "react-toastify";
 
 const Product = (props) => {
    const { img, name, seller, ratings, price } = props.product;
-   const handleAddToCart = props.handleAddToCart;
+
+   const handleAddToCart = (props) => {
+      const handleAddToCart = props.handleAddToCart;
+      // handleAddToCart = handleAddToCart;
+      toast("Wow so easy!");
+   };
 
    return (
       <div className="product">

@@ -18,6 +18,7 @@ const Shop = () => {
          .then((res) => res.json())
          .then((data) => setProducts(data));
    }, []);
+   // const
 
    useEffect(() => {
       const storedCart = getShoppingCart();
