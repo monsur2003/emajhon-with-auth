@@ -1,0 +1,126 @@
+.container {
+   margin-top: 20px;
+}
+.login-form {
+   width: 500px;
+
+   margin: 0 auto;
+   padding: 20px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   background-color: #fff;
+
+   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.signup {
+   margin-top: 10px;
+   text-align: center;
+   color: #b44b2b;
+}
+
+.or {
+   display: flex;
+   flex-direction: row-reverse;
+}
+.form-title {
+   text-align: center;
+   font-size: 30px;
+   font-weight: bold;
+}
+.form-control {
+   padding: 10px;
+   display: flex;
+   justify-content: start;
+   align-items: center;
+   flex-direction: column;
+   position: relative;
+}
+
+.form-control label {
+   text-align: start;
+}
+
+.login-form__label {
+   display: block;
+
+   margin-bottom: 5px;
+   font-size: 16px;
+}
+
+.login-form__input {
+   width: 100%;
+   height: 40px;
+
+   margin-bottom: 10px;
+   padding: 0 10px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   font-size: 16px;
+}
+
+.login-form__button {
+   display: block;
+   width: 100%;
+   height: 40px;
+   margin-top: 15px;
+   background-color: #d89242;
+   color: #fff;
+   border: none;
+   border-radius: 5px;
+   font-size: 16px;
+   cursor: pointer;
+}
+
+.login-form__button:hover {
+   background-color: #b44b2b;
+}
+
+.control img {
+   width: 28px;
+   height: 25px;
+   opacity: 50%;
+   cursor: pointer;
+}
+.alert {
+   margin-top: -20px;
+   padding: 0;
+}
+.error {
+   color: rgb(255, 174, 0);
+}
+.success {
+   color: rgb(10, 190, 91);
+}
+.control {
+   position: absolute;
+   transform: translateY(120%);
+   right: 10px;
+}
+
+.login-form__google-button {
+   display: block;
+   width: 100%;
+   height: 40px;
+   margin-top: 20px;
+   background-color: #fff;
+   color: #666;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   font-size: 16px;
+   cursor: pointer;
+}
+
+.login-form__google-button:hover {
+   background-color: #f2f2f2;
+}
+
+.login-form__google-icon {
+   display: inline-block;
+   width: 18px;
+   height: 18px;
+   margin-right: 10px;
+   background-image: url("path/to/google-icon.png");
+   background-repeat: no-repeat;
+   background-size: contain;
+}

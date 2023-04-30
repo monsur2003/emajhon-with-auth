@@ -1,54 +1,38 @@
 import React, { useContext, useState } from "react";
-import "./Login.css";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import eye from "../../assets/eye.png";
 import hide from "../../assets/hidden.png";
 import { authContext } from "../AuthProvider/AuthProvider";
 
-const Login = () => {
-   // state section is here
+const SignUp = () => {
    const [control, setControl] = useState(false);
-   const { googleSignIn, login } = useContext(authContext);
    const [error, setError] = useState("");
    const [success, setSuccess] = useState("");
-   const navigate = useNavigate();
 
-   const location = useLocation();
-   //    console.log(location);
+   const { createUser } = useContext(authContext);
 
-   const from = location.state?.from?.pathname || "/";
-   //    console.log(from);
-
-   // login function start from here
-   const handleLogin = (event) => {
+   const handleSignUp = (event) => {
       event.preventDefault();
       const form = event.target;
       const email = form.email.value;
-      const password = form.password.value;
+      const password = form.pass.value;
+      const confirmPassword = form.confirm.value;
 
-      login(email, password)
+      if (password !== confirmPassword) {
+         setError("Password Didn't match");
+         return;
+      } else if (!/(?=.*[0-9].*[0-9])/.test(password)) {
+         setError("please enter atleast two number");
+         return;
+      }
+
+      createUser(email, password)
          .then((result) => {
             const loggedUser = result.user;
-            console.log(loggedUser);
             setError("");
-            setSuccess("User loggedin successfully");
-            navigate(from, { replace: true });
-         })
-         .catch((error) => {
-            console.log(error.message);
-            setSuccess("");
-            setError(error.message);
-         });
-   };
-
-   const handleGoogleSignIn = (email, password) => {
-      googleSignIn(email, password)
-         .then((result) => {
-            const loggedUser = result.user;
+            setSuccess("user created successfully");
+            form.reset();
             console.log(loggedUser);
-            setError("");
-            setSuccess("User logged in successfully");
-            navigate(from, { replace: true });
          })
          .catch((error) => {
             setSuccess("");
@@ -58,17 +42,17 @@ const Login = () => {
 
    return (
       <div className="container">
-         <form onSubmit={handleLogin} className="login-form">
-            <h2 className="form-title">Log in</h2>
+         <form onSubmit={handleSignUp} className="login-form">
+            <h2 className="form-title">Sign up</h2>
             <div className="form-control">
                <label htmlFor="email" className="login-form__label">
                   Email
                </label>
                <input
                   type="email"
+                  id="email"
                   name="email"
                   required
-                  id="email"
                   className="login-form__input"
                />
             </div>
@@ -79,9 +63,9 @@ const Login = () => {
                <input
                   type={control ? "text" : "password"}
                   id="password"
-                  name="password"
-                  required
                   className="login-form__input"
+                  name="pass"
+                  required
                />
                <div
                   onClick={() => {
@@ -95,6 +79,30 @@ const Login = () => {
                   )}
                </div>
             </div>
+            <div className="form-control">
+               <label htmlFor="confirmPassword" className="login-form__label">
+                  Confirm Password
+               </label>
+               <input
+                  type={control ? "text" : "password"}
+                  id="password"
+                  className="login-form__input"
+                  name="confirm"
+                  required
+               />
+               <div
+                  onClick={() => {
+                     setControl(!control);
+                  }}
+                  className="control">
+                  {control ? (
+                     <img src={hide} alt="" />
+                  ) : (
+                     <img src={eye} alt="" />
+                  )}
+               </div>
+            </div>
+
             <div className="alert">
                {error ? (
                   <p className="error">{error}</p>
@@ -102,13 +110,14 @@ const Login = () => {
                   <p className="success">{success}</p>
                )}
             </div>
+
             <button type="submit" className="login-form__button">
-               Login
+               Sign up
             </button>
 
             <div className="signup">
                <small>
-                  New To Emazhon? <Link to="/signUp">Create Account</Link>{" "}
+                  Already have an Account <Link to="/login">Login</Link>{" "}
                </small>
             </div>
 
@@ -116,10 +125,7 @@ const Login = () => {
                <hr /> or <hr />
             </div>
 
-            <button
-               onClick={handleGoogleSignIn}
-               type="button"
-               className="login-form__google-button">
+            <button type="button" className="login-form__google-button">
                <span className="login-form__google-icon"></span>
                Login with Google
             </button>
@@ -128,4 +134,4 @@ const Login = () => {
    );
 };
 
-export default Login;
+export default SignUp;
